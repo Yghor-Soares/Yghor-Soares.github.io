@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var locale = 'pt-BR';
+        var theme = 'light';
+        try {
+          var matchLocale = function (value) {
+            if (/^en/i.test(value)) return 'en-US';
+            if (/^pt/i.test(value)) return 'pt-BR';
+            return null;
+          };
+          var fromQuery = matchLocale(new URLSearchParams(location.search).get('lang') || '');
+          var stored = localStorage.getItem('locale');
+          if (fromQuery) {
+            locale = fromQuery;
+            localStorage.setItem('locale', fromQuery);
+          } else if (stored === 'pt-BR' || stored === 'en-US') {
+            locale = stored;
+          } else {
+            var languages = navigator.languages || [navigator.language];
+            for (var i = 0; i < languages.length; i++) {
+              var match = matchLocale(languages[i] || '');
+              if (match) {
+                locale = match;
+                break;
+              }
+            }
+          }
+          var storedTheme = localStorage.getItem('theme');
+          if (storedTheme === 'light' || storedTheme === 'dark') {
+            theme = storedTheme;
+          } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            theme = 'dark';
+          }
+        } catch (error) {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) theme = 'dark';
+        }
+        root.lang = locale;
+        root.dataset.theme = theme;
+      })();
+    </script>
+    <title>Yghor Santos · Desenvolvedor Front-end e UI/UX Designer</title>
+    <meta
+      name="description"
+      content="Portfólio de Yghor Santos, desenvolvedor Front-end, UI/UX Designer e especialista em Excel. Projetos, experiência, formação e contato."
+    />
+    <meta name="theme-color" content="#eef4fa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101c2a" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Yghor Santos · Desenvolvedor Front-end e UI/UX Designer" />
+    <meta
+      property="og:description"
+      content="Desenvolvedor Front-end, UI/UX Designer e especialista em Excel."
+    />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="padding: 1rem; font-family: system-ui, sans-serif">
+        Este portfólio precisa de JavaScript. Contato: yghorsoaressantos@gmail.com ·
+        <a href="https://github.com/Yghor-Soares">github.com/Yghor-Soares</a>
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

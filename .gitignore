@@ -1,0 +1,8 @@
+node_modules
+dist
+*.local
+.vite
+src/assets/cv/
+src/assets/photo/
+src/assets/projects/
+src/assets/pixel/*.webp

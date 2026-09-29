@@ -1,0 +1,109 @@
+.term {
+  --step: 3px;
+  position: relative;
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--term-accent, var(--color-accent));
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) ease,
+    text-decoration-color var(--duration-fast) ease;
+}
+
+.term:hover {
+  color: var(--term-accent, var(--color-accent));
+  text-decoration-style: solid;
+}
+
+/* Tooltip "Perguntar?" no mesmo estilo do balão do mini Matheus */
+
+.tip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  z-index: 5;
+  /* Sem isso, em termos curtos a caixa encolhe até a metade da largura do termo e o texto vaza para a direita. */
+  width: max-content;
+  filter: drop-shadow(3px 3px 0 var(--color-wood));
+  /* Centralização e escala no mesmo transform: o minificador do build descarta `translate` quando a regra também tem `transform`. */
+  transform: translateX(-50%) scale(0);
+  transform-origin: 50% calc(100% + 10px);
+  transition: transform 180ms ease-in-out;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .term:hover .tip {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.term:focus-visible .tip {
+  transform: translateX(-50%) scale(1);
+}
+
+.tipFrame,
+.tipInner {
+  display: block;
+  clip-path: polygon(
+    0 var(--step),
+    var(--step) var(--step),
+    var(--step) 0,
+    calc(100% - var(--step)) 0,
+    calc(100% - var(--step)) var(--step),
+    100% var(--step),
+    100% calc(100% - var(--step)),
+    calc(100% - var(--step)) calc(100% - var(--step)),
+    calc(100% - var(--step)) 100%,
+    var(--step) 100%,
+    var(--step) calc(100% - var(--step)),
+    0 calc(100% - var(--step))
+  );
+}
+
+.tipFrame {
+  padding: 2px;
+  background: var(--color-ink);
+}
+
+.tipInner {
+  padding: 0.3rem 0.6rem;
+  background: var(--color-surface-raised);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+/* Cauda em escadinha, centralizada, apontando para o termo */
+.tipTail {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 50%;
+  width: 12px;
+  height: 8px;
+  translate: -50% 0;
+  background: var(--color-ink);
+  clip-path: polygon(0 0, 100% 0, 100% 25%, 75% 25%, 75% 50%, 62.5% 50%, 62.5% 100%, 37.5% 100%, 37.5% 50%, 25% 50%, 25% 25%, 0 25%);
+}
+
+.tipTail::after {
+  content: '';
+  position: absolute;
+  inset: 0 2px 2px;
+  background: var(--color-surface-raised);
+  clip-path: polygon(0 0, 100% 0, 100% 25%, 75% 25%, 75% 60%, 25% 60%, 25% 25%, 0 25%);
+}
