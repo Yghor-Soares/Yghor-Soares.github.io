@@ -19,5 +19,9 @@ export const contacts = {
     href: 'https://www.linkedin.com/in/yghorsantos/',
     display: 'linkedin.com/in/yghorsantos',
   },
+  instagram: {
+    href: 'https://www.instagram.com/yghorsoaress/',
+    display: '@yghorsoaress',
+  },
   sourceCode: 'https://github.com/Yghor-Soares',
 };

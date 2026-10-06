@@ -7,6 +7,7 @@ import styles from './Education.module.css';
 
 function Years({ item }: { item: EducationItem }) {
   const { t } = useI18n();
+  if (!item.start) return null;
   if (!item.end) return <time dateTime={String(item.start)}>{item.start}</time>;
   return (
     <>
@@ -26,14 +27,34 @@ function Card({ item, featured = false }: { item: EducationItem; featured?: bool
   return (
     <li className={styles.card} data-featured={featured}>
       <p className={styles.kind}>{t.education.kinds[item.kind]}</p>
-      <h4 className={styles.title}>{copy.title}</h4>
-      <p className={styles.institution}>
-        <CuriousTerm id={item.id}>{item.institution}</CuriousTerm>
-      </p>
-      <p className={styles.years}>
-        <Years item={item} />
-      </p>
+      <h4 className={styles.title}>
+        <CuriousTerm id={item.id}>{copy.title}</CuriousTerm>
+      </h4>
+      {item.institution && (
+        <p className={styles.institution}>
+          <CuriousTerm id={item.id}>{item.institution}</CuriousTerm>
+        </p>
+      )}
+      {item.platform && (
+        <p className={styles.institution}>
+          {t.education.platformLabel}:{' '}
+          <CuriousTerm id={item.platform === 'GitHub' ? 'github' : item.platform === 'Fundação Bradesco' ? 'fundacao-bradesco' : item.platform.startsWith('Escola Nacional de Administração Pública') ? 'enap' : item.id}>
+            {item.platform}
+          </CuriousTerm>
+        </p>
+      )}
+      {item.start && (
+        <p className={styles.years}>
+          <Years item={item} />
+        </p>
+      )}
       {copy.note && <p className={styles.note}>{copy.note}</p>}
+      {item.certificatePdf && (
+        <a className={styles.certificate} href={`${import.meta.env.BASE_URL}${item.certificatePdf}`} target="_blank" rel="noopener">
+          {t.education.certificateLink}
+          <span className="visually-hidden"> {t.common.newTab}</span>
+        </a>
+      )}
     </li>
   );
 }

@@ -71,6 +71,16 @@ export function Contact() {
               </a>
             </li>
             <li>
+              <a href={contacts.instagram.href} target="_blank" rel="noopener">
+                <Icon name="instagram" size={18} />
+                <span>
+                  <span className={styles.linkLabel}>{t.contact.instagram}</span>
+                  {contacts.instagram.display}
+                </span>
+                <span className="visually-hidden"> {t.common.newTab}</span>
+              </a>
+            </li>
+            <li>
               <a href={contacts.github.href} target="_blank" rel="noopener">
                 <Icon name="github" size={18} />
                 <span>

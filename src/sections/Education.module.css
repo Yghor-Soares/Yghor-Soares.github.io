@@ -91,6 +91,16 @@
   font-size: var(--text-sm);
 }
 
+.certificate {
+  width: fit-content;
+  margin-top: var(--space-2);
+  color: var(--color-accent);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .languages {
   display: grid;
   border-top: 2px solid var(--color-ink);
