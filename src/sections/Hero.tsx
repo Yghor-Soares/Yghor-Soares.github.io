@@ -1,12 +1,15 @@
 import { TermText } from '../buddy/TermText';
+import { useBuddy } from '../buddy/useBuddy';
 import { Icon } from '../components/Icon';
 import { profile } from '../data/contacts';
 import { useI18n } from '../i18n/useI18n';
-import { LaptopScene } from './LaptopScene';
+import { CompanyLogoScene } from './CompanyLogoScene';
 import styles from './Hero.module.css';
 
 export function Hero() {
   const { t } = useI18n();
+  const { ask } = useBuddy();
+
   return (
     <section id="top" className={styles.hero} aria-labelledby="hero-title">
       <div className={`container-wide ${styles.grid}`}>
@@ -32,8 +35,24 @@ export function Hero() {
         </div>
 
         <figure className={styles.stage}>
-          <LaptopScene className={styles.laptopScene} label={t.hero.spriteAlt} />
-          <div className={styles.shelf} aria-hidden="true" />
+          <a
+            className={styles.companyLogoLink}
+            href="https://www.instagram.com/idiomapopular/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram Idioma Popular @idiomapopular"
+          >
+            <CompanyLogoScene className={styles.companyLogoScene} label={t.hero.spriteAlt} />
+            <span className="visually-hidden"> {t.common.newTab}</span>
+          </a>
+          <button
+            type="button"
+            className={styles.shelf}
+            onClick={() => ask('idioma-popular')}
+            aria-label={`${t.buddy.titles['idioma-popular']}: ${t.buddy.askSuffix}`}
+          >
+            <span>{t.buddy.titles['idioma-popular']}</span>
+          </button>
         </figure>
       </div>
 

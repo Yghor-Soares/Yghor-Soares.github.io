@@ -1,5 +1,6 @@
 import { SiteFooter } from './components/SiteFooter';
 import { SiteHeader } from './components/SiteHeader';
+import { IntroTransition } from './components/IntroTransition';
 import { useI18n } from './i18n/useI18n';
 import { About } from './sections/About';
 import { Contact } from './sections/Contact';
@@ -28,6 +29,7 @@ export function App() {
         <Contact />
       </main>
       <SiteFooter />
+      <IntroTransition />
     </>
   );
 }

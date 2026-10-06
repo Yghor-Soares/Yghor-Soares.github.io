@@ -1,0 +1,296 @@
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 46%, rgb(38 94 160 / 0.62), transparent 42%),
+    #101d2e;
+  pointer-events: all;
+  animation: curtain-exit 5s ease-in both;
+}
+
+.cameraWrap {
+  position: relative;
+  z-index: 2;
+  width: min(15rem, 52vw);
+  filter: drop-shadow(0 1.5rem 2rem rgb(0 0 0 / 0.35));
+  animation: camera-arrive 4.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.camera {
+  width: 100%;
+  overflow: visible;
+}
+
+.cameraBody {
+  fill: #dce8f5;
+  stroke: #8fb9e7;
+  stroke-width: 4;
+}
+
+.cameraTop {
+  fill: #a9c9eb;
+}
+
+.lensOuter {
+  fill: #172b43;
+  stroke: #71b4ff;
+  stroke-width: 7;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: shutter 4.4s ease-in-out both;
+}
+
+.lensInner {
+  fill: #2869ad;
+  stroke: #acd5ff;
+  stroke-width: 3;
+}
+
+.lensGlint {
+  fill: #eaf5ff;
+  opacity: 0.8;
+}
+
+.cameraFlash {
+  fill: #fff;
+  animation: flash-light 4.4s ease-in-out both;
+}
+
+.cameraLight {
+  fill: #48a6f5;
+}
+
+.photo {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  align-content: start;
+  gap: 8%;
+  width: min(34rem, 76vw);
+  aspect-ratio: 1.6;
+  padding: clamp(0.75rem, 3vw, 1.5rem);
+  border: 1px solid rgb(220 236 255 / 0.9);
+  border-radius: 0.5rem;
+  background: #eef4fa;
+  box-shadow: 0 2rem 6rem rgb(0 0 0 / 0.4);
+  transform: scale(0.08) rotate(-7deg);
+  opacity: 0;
+  animation: photo-develop 3.8s cubic-bezier(0.16, 0.82, 0.24, 1) 1.2s both;
+}
+
+.photoHeader {
+  display: flex;
+  align-items: center;
+  gap: 4%;
+  height: 12%;
+  border-bottom: 1px solid #c5d8ed;
+}
+
+.photoMark {
+  display: grid;
+  width: 9%;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 2px;
+  background: #1c4776;
+  color: #fff;
+  font-family: Georgia, serif;
+  font-size: clamp(0.35rem, 2vw, 0.75rem);
+  font-weight: 700;
+}
+
+.photoNav {
+  width: 11%;
+  height: 12%;
+  border-radius: 99px;
+  background: #9cb2ca;
+}
+
+.photoContent {
+  display: grid;
+  grid-template-columns: 1.35fr 0.8fr;
+  align-items: center;
+  gap: 8%;
+  height: 76%;
+  padding-inline: 4%;
+}
+
+.photoCopy {
+  display: grid;
+  justify-items: start;
+  gap: 9%;
+}
+
+.photoEyebrow,
+.photoLine,
+.photoLineShort,
+.photoTitle,
+.photoButton {
+  display: block;
+  border-radius: 99px;
+  background: #90a9c4;
+}
+
+.photoEyebrow {
+  width: 55%;
+  height: 0.22rem;
+  background: #3476bb;
+}
+
+.photoTitle {
+  width: 92%;
+  height: clamp(0.65rem, 4vw, 1.4rem);
+  border-radius: 3px;
+  background: #172b43;
+}
+
+.photoLine {
+  width: 94%;
+  height: 0.28rem;
+}
+
+.photoLineShort {
+  width: 68%;
+  height: 0.28rem;
+}
+
+.photoButton {
+  width: 31%;
+  height: clamp(0.45rem, 2.5vw, 0.85rem);
+  border-radius: 2px;
+  background: #245fae;
+}
+
+.photoArtwork {
+  position: relative;
+  display: grid;
+  height: 80%;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 4px;
+  background: linear-gradient(145deg, #d5e5f6, #a8c7e8);
+}
+
+.companyLogo {
+  width: 76%;
+  height: 76%;
+  object-fit: contain;
+  border-radius: 3px;
+  box-shadow: 0 0.6rem 1.4rem rgb(23 43 67 / 0.2);
+}
+
+.flash {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  animation: full-flash 5s ease-out both;
+}
+
+@keyframes camera-arrive {
+  0% {
+    opacity: 0;
+    transform: translateY(1.5rem) scale(0.72);
+  }
+  14% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  42% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  57%,
+  100% {
+    opacity: 0;
+    transform: translateY(-2rem) scale(0.88);
+  }
+}
+
+@keyframes shutter {
+  0%,
+  31%,
+  52%,
+  100% {
+    transform: scale(1);
+  }
+  38%,
+  45% {
+    transform: scale(0.62);
+  }
+}
+
+@keyframes flash-light {
+  0%,
+  34%,
+  53%,
+  100% {
+    opacity: 0.7;
+  }
+  39%,
+  46% {
+    opacity: 1;
+  }
+}
+
+@keyframes full-flash {
+  0%,
+  33%,
+  52%,
+  100% {
+    opacity: 0;
+  }
+  38% {
+    opacity: 0.88;
+  }
+  43% {
+    opacity: 0;
+  }
+}
+
+@keyframes photo-develop {
+  0% {
+    opacity: 0;
+    transform: scale(0.08) rotate(-7deg);
+  }
+  15% {
+    opacity: 1;
+    transform: scale(0.22) rotate(2deg);
+  }
+  42% {
+    opacity: 1;
+    transform: scale(0.72) rotate(0);
+  }
+  76% {
+    opacity: 1;
+    transform: scale(3.5) rotate(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(5.4) rotate(0);
+  }
+}
+
+@keyframes curtain-exit {
+  0%,
+  75% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curtain {
+    display: none;
+  }
+}
