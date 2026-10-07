@@ -131,6 +131,17 @@ sideY = paragraph('Análise e Desenvolvimento de Sistemas', sideX, sideY, sideWi
 sideY = paragraph('ETEC - Escola Técnica Estadual de São Paulo', sideX, sideY, sideWidth, { size: 8.5, color: colors.muted, after: 3 });
 sideY = paragraph('2023 - 2025', sideX, sideY, sideWidth, { bold: true, size: 8.5, color: colors.blue, after: 15 });
 
+sideY = sectionHeading('Formação complementar', sideX, sideY, sideWidth);
+for (const [title, platform] of [
+  ['Fundamentos de TI: Hardware e Software', 'Fundação Bradesco'],
+  ['Administração de Banco de Dados', 'Fundação Bradesco'],
+  ['GitHub Actions', 'Enap'],
+  ['GitHub Codespaces', 'Enap'],
+]) {
+  sideY = paragraph(title, sideX, sideY, sideWidth, { bold: true, size: 8.2, after: 2 });
+  sideY = paragraph(platform, sideX, sideY, sideWidth, { size: 7.8, color: colors.muted, after: 7 });
+}
+
 sideY = sectionHeading('Competências', sideX, sideY, sideWidth);
 for (const skill of [
   'Excel Avançado',
