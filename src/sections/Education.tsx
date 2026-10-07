@@ -20,7 +20,22 @@ function Years({ item }: { item: EducationItem }) {
   );
 }
 
-function Card({ item, featured = false }: { item: EducationItem; featured?: boolean }) {
+function platformTermId(platform: string) {
+  if (platform === 'GitHub') return 'github';
+  if (platform === 'Fundação Bradesco') return 'fundacao-bradesco';
+  if (platform.startsWith('Escola Nacional de Administração Pública')) return 'enap';
+  return platform;
+}
+
+function Card({
+  item,
+  featured = false,
+  showPlatform = true,
+}: {
+  item: EducationItem;
+  featured?: boolean;
+  showPlatform?: boolean;
+}) {
   const { t } = useI18n();
   const copy = t.education.items[item.id];
 
@@ -35,12 +50,10 @@ function Card({ item, featured = false }: { item: EducationItem; featured?: bool
           <CuriousTerm id={item.id}>{item.institution}</CuriousTerm>
         </p>
       )}
-      {item.platform && (
+      {showPlatform && item.platform && (
         <p className={styles.institution}>
           {t.education.platformLabel}:{' '}
-          <CuriousTerm id={item.platform === 'GitHub' ? 'github' : item.platform === 'Fundação Bradesco' ? 'fundacao-bradesco' : item.platform.startsWith('Escola Nacional de Administração Pública') ? 'enap' : item.id}>
-            {item.platform}
-          </CuriousTerm>
+          <CuriousTerm id={platformTermId(item.platform)}>{item.platform}</CuriousTerm>
         </p>
       )}
       {item.start && (
@@ -64,6 +77,13 @@ export function Education() {
   const reveal = useReveal<HTMLDivElement>();
   const academic = education.filter((item) => item.group === 'academic');
   const complementary = education.filter((item) => item.group === 'complementary');
+  const complementaryByPlatform = new Map<string, EducationItem[]>();
+  complementary.forEach((item) => {
+    const platform = item.platform ?? t.education.otherPlatform;
+    const courses = complementaryByPlatform.get(platform) ?? [];
+    courses.push(item);
+    complementaryByPlatform.set(platform, courses);
+  });
 
   return (
     <section id="education" className={styles.education} aria-labelledby="education-title">
@@ -89,9 +109,38 @@ export function Education() {
                   <h3 id="education-complementary" className={styles.group}>
                     {t.education.groups.complementary}
                   </h3>
-                  <ul role="list" className={styles.cards}>
-                    {complementary.map((item) => (
-                      <Card key={item.id} item={item} />
+                  <ul role="list" className={styles.platformFolders}>
+                    {[...complementaryByPlatform].map(([platform, courses]) => (
+                      <li key={platform} className={styles.platformFolder}>
+                        <details className={styles.folderDetails}>
+                          <summary className={styles.folderCover}>
+                            <svg className={styles.folderIcon} viewBox="0 0 64 48" aria-hidden="true">
+                              <path
+                                className={styles.folderBack}
+                                d="M4 11a5 5 0 0 1 5-5h18l7 6h21a5 5 0 0 1 5 5v23a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V11Z"
+                              />
+                              <path
+                                className={styles.folderPaper}
+                                d="M10 17h44a3 3 0 0 1 3 3v17H10a3 3 0 0 1-3-3V20a3 3 0 0 1 3-3Z"
+                              />
+                              <path
+                                className={styles.folderFront}
+                                d="M4 19a5 5 0 0 1 5-5h46a5 5 0 0 1 5 5v20a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V19Z"
+                              />
+                            </svg>
+                            <span className={styles.folderName}>{platform}</span>
+                            <span className={styles.folderCount} aria-hidden="true">
+                              {courses.length}
+                            </span>
+                            <span className={styles.folderChevron} aria-hidden="true" />
+                          </summary>
+                          <ul role="list" className={`${styles.cards} ${styles.folderCourses}`}>
+                            {courses.map((item) => (
+                              <Card key={item.id} item={item} showPlatform={false} />
+                            ))}
+                          </ul>
+                        </details>
+                      </li>
                     ))}
                   </ul>
                 </section>

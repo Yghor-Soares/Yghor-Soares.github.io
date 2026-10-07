@@ -220,6 +220,7 @@ export const enUS: Messages = {
       'predictive-solutions-r-python': { title: 'Data-Driven Predictive Solutions with R and Python', note: '' },
     },
     platformLabel: 'Platform',
+    otherPlatform: 'Other platform',
     certificateLink: 'View certificate PDF',
     languagesTitle: 'Languages',
     languages: {

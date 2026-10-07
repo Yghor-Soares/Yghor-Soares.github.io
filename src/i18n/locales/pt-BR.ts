@@ -217,6 +217,7 @@ export const ptBR = {
       'predictive-solutions-r-python': { title: 'Soluções Preditivas Baseadas em Dados com R e Python', note: '' },
     },
     platformLabel: 'Plataforma',
+    otherPlatform: 'Outra plataforma',
     certificateLink: 'Ver certificado em PDF',
     languagesTitle: 'Idiomas',
     languages: {

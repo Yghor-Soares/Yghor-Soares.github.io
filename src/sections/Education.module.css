@@ -34,6 +34,175 @@
   gap: var(--space-4);
 }
 
+.platformFolders {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.platformFolder {
+  min-width: 0;
+}
+
+.folderDetails {
+  overflow: hidden;
+  border: 1px solid #438abf;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #d8f4fa, #aee6f1);
+  box-shadow: 0 7px 18px -12px rgb(16 89 125 / 0.65);
+}
+
+.folderCover {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.75rem minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 5.5rem;
+  padding: var(--space-4);
+  background: linear-gradient(135deg, #53d2e2, #23accd);
+  color: #073c5b;
+  cursor: pointer;
+  list-style: none;
+  transition:
+    background var(--duration) ease,
+    box-shadow var(--duration) ease;
+}
+
+.folderCover::-webkit-details-marker {
+  display: none;
+}
+
+.folderCover::marker {
+  content: '';
+}
+
+.folderCover:hover {
+  background: linear-gradient(135deg, #65ddec, #31badd);
+}
+
+.folderIcon {
+  width: 3.75rem;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 2px 2px rgb(8 74 102 / 0.16));
+}
+
+.folderBack {
+  fill: #0789ad;
+}
+
+.folderPaper {
+  fill: #f1fdff;
+}
+
+.folderFront {
+  fill: #2cbed8;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.folderName {
+  min-width: 0;
+  font-size: var(--text-sm);
+  font-weight: 800;
+  line-height: var(--leading-snug);
+  overflow-wrap: anywhere;
+}
+
+.folderCount {
+  display: grid;
+  min-width: 1.8rem;
+  height: 1.8rem;
+  place-items: center;
+  padding-inline: 0.4rem;
+  border: 1px solid rgb(7 60 91 / 0.2);
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 0.58);
+  color: #073c5b;
+  font-size: var(--text-xs);
+  font-weight: 800;
+}
+
+.folderChevron {
+  width: 0.65rem;
+  height: 0.65rem;
+  margin-right: 0.2rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.folderDetails[open] .folderFront {
+  transform: rotateX(25deg) translateY(-2px);
+}
+
+.folderDetails[open] .folderChevron {
+  transform: rotate(225deg) translateY(-2px);
+}
+
+.folderCourses {
+  padding: var(--space-4);
+  border-top: 1px solid rgb(15 94 133 / 0.24);
+  background: #dff5fa;
+}
+
+.platformFolder .card {
+  border-color: #a7cbdc;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 27px, #d1e8ef 27px 28px),
+    #f7fdff;
+}
+
+:global(:root[data-theme='dark']) .platformFolder {
+  border-color: #347d9e;
+}
+
+:global(:root[data-theme='dark']) .folderDetails {
+  border-color: #347d9e;
+  background: linear-gradient(145deg, #1c5269, #16465f);
+}
+
+:global(:root[data-theme='dark']) .folderCover {
+  background: linear-gradient(135deg, #188aa7, #11668d);
+  color: #effcff;
+}
+
+:global(:root[data-theme='dark']) .folderCover:hover {
+  background: linear-gradient(135deg, #209bb8, #16799f);
+}
+
+:global(:root[data-theme='dark']) .folderBack {
+  fill: #075777;
+}
+
+:global(:root[data-theme='dark']) .folderFront {
+  fill: #159bbb;
+}
+
+:global(:root[data-theme='dark']) .folderPaper {
+  fill: #e7f8fc;
+}
+
+:global(:root[data-theme='dark']) .folderCount {
+  border-color: rgb(239 252 255 / 0.24);
+  background: rgb(9 51 71 / 0.48);
+  color: #effcff;
+}
+
+:global(:root[data-theme='dark']) .folderCourses {
+  border-color: #347d9e;
+  background: #1b4558;
+}
+
+:global(:root[data-theme='dark']) .platformFolder .card {
+  border-color: #3e718a;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 27px, #2f596d 27px 28px),
+    #204b5e;
+}
+
 /* Ficha de catálogo */
 .card {
   position: relative;
