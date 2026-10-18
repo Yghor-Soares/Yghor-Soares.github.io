@@ -20,8 +20,8 @@ export const contacts = {
     display: 'linkedin.com/in/yghorsantos',
   },
   instagram: {
-    href: 'https://www.instagram.com/yghorsoaress/',
-    display: '@yghorsoaress',
+    href: 'https://www.instagram.com/yghorsoaress.dev/',
+    display: '@yghorsoaress.dev',
   },
   sourceCode: 'https://github.com/Yghor-Soares',
 };
